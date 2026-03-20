@@ -7,7 +7,12 @@
 
 const char *lugares[] = {"Bosque", "Pradera","Jungla","Granja","Laguna Dorada", "Bosque Carmesi"};
 const char *posiciones[] = {"Norte", "Este", "Sur", "Oeste"};
-const char *tipos[] = {"Hombre Lobo", "Pulpo Infernal","Mujer Seductora","Granjero"};
+const char *tiposBosque[] = {"Hombre Lobo", "Lobo Blanco", "Buho Gigante", "Oso Negro", "Oso Blanco"};
+const char *tiposPradera[] = {"Conejo", "Oveja Gigante", "Slime Azul", "Aguila Calva"};
+const char *tiposJungla[] = {"Boa Constrictora Gigante", "Rana Venenosa", "Caiman", "Nutria Pantera Negra", "Piraña"};
+const char *tiposGranja[] = {"Granjero", "Vaca", "Gallina","Oveja", "Gallina Pavo Real"};
+const char *tiposLagDorada[] = {"Mujer Seductora", "Dragon Blanco", "Slime Dorado"};
+const char *tiposBCarmesi[] = {"Pulpo Infernal Carmesi", "Zombie Mutante Carmesi", "Slime Carmesi", "Arraña Corrupta Carmesi", "Cangrejo Gigante Azul"};
 typedef struct 
 {
     char tipo;
@@ -20,7 +25,8 @@ typedef struct
 
 
 }Chunk;
-
+void GuardarChunk(){}
+void GuardarVariosChunk(){}
 
 int GenerarTerreno(const char lugares[],int size){
     int random = rand() % size;
@@ -30,21 +36,8 @@ char GenerarPosicion(const char posiciones[], int size){
      int random = rand() % size;
     return posiciones[random];  
 }
-char GenerarTipo(int TerrenoActual){
-    int tamañoTipos= sizeof(tipos)/ sizeof(tipos[0]);    
-    bool tipoCorrecto = true;
-    while (tipoCorrecto)
-    {
-        char random = rand() % tamañoTipos;
-        if(3<TerrenoActual>5 && 3<random>5)
-        {   
-            return tipos[random];
-        }
-        else
-        {
-            break;
-        }   
-    }
+char GenerarTipo(int TerrenoActual){   
+    
     
 }
 char GenerarTipos(int CantidadTipos, char TerrenoActual){
