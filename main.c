@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
+#include <stdarg.h>
 
 
 const char *lugares[] = {"Bosque", "Pradera","Jungla","Granja","Laguna Dorada", "Bosque Carmesi"};
@@ -36,7 +37,7 @@ int GenerarPosicion( int size){
      int random = rand() % size;
     return random;  
 }
-const char* GenerarTipo(int TerrenoActual){   
+const char* GenerarTipo(int TerrenoActual){//Se puede reemplazar con un bucle
     if (TerrenoActual == 0)
     {
         int tamanotipo = sizeof(tiposBosque)/ sizeof(tiposBosque[0]);
@@ -77,19 +78,15 @@ const char* GenerarTipo(int TerrenoActual){
         return "El Terreno Actual no existe";
     }    
 }
-void GenerarTipos(int CantidadTipos, char TerrenoActual){
-
-    
+void GenerarTipos(int CantidadTipos, char TerrenoActual){    
     for (int i = 0; i < CantidadTipos; i++)
     {
         const char* TipoActual = GenerarTipo(TerrenoActual);
-
-
         printf("Ves un: %s\n", TipoActual);
     }
 
 }
-void GenerarChunk(){
+int GenerarChunk(){
     int tamanoLugares = sizeof(lugares)/ sizeof(lugares[0]);
     int tamanoPosiciones = sizeof(posiciones)/ sizeof(posiciones[0]);
     int MaximaCantidadTipos = 6;
@@ -104,14 +101,93 @@ void GenerarChunk(){
     printf("Te encuentras en: %s\n", TerrenoActualNombre);
     printf("Mirando Hacia: %s\n", PosicionActualNombre);
     GenerarTipos(CantidadTipos, TerrenoActual);
+    return PosicionActual;
+}
+void GenerarChunkB(int posicion){
+    int tamanoLugares = sizeof(lugares)/ sizeof(lugares[0]);
+    int MaximaCantidadTipos = 6;
+    int TerrenoActual = GenerarTerreno(tamanoLugares);
+    const char* TerrenoActualNombre = lugares[TerrenoActual];
+
+    const char* PosicionActualNombre = posiciones[posicion];
+    int CantidadTipos = rand() % MaximaCantidadTipos;
+
+   
+    printf("Te encuentras en: %s\n", TerrenoActualNombre);
+    printf("Mirando Hacia: %s\n", PosicionActualNombre);
+    GenerarTipos(CantidadTipos, TerrenoActual);
+}
+void GenerarMenu(int posicion){
+
+if (posicion == 0)
+{
+    
+    printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
+    printf("2-> Voltear hacia: %s\n",  posiciones[posicion+1]);
+    printf("3-> Voltear hacia: %s\n",  posiciones[posicion+2]);
+    printf("4-> Voltear hacia: %s\n",  posiciones[posicion+3]);
+}else if (posicion == 1)
+{
+    
+    printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
+
+    printf("2-> Voltear hacia: %s\n",  posiciones[posicion-1]);
+    printf("3-> Voltear hacia: %s\n",  posiciones[posicion+2]);
+    printf("4-> Voltear hacia: %s\n",  posiciones[posicion+3]);
+}
+else if (posicion ==2)
+{
+    
+    printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
+
+    printf("2-> Voltear hacia: %s\n",  posiciones[posicion-1]);
+    printf("3-> Voltear hacia: %s\n",  posiciones[posicion-2]);
+    printf("4-> Voltear hacia: %s\n",  posiciones[posicion+3]);
+}
+else if (posicion ==3)
+{
+    printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
+
+    printf("2-> Voltear hacia: %s\n",  posiciones[posicion-1]);
+    printf("3-> Voltear hacia: %s\n",  posiciones[posicion-2]);
+    printf("4-> Voltear hacia: %s\n",  posiciones[posicion-3]);
+}
 }
 
+
+
+
 int main (){
+    srand(time(NULL));
+    int posicion = GenerarChunk();
     while (true)
     {
-        srand(time(NULL));
-        GenerarChunk();
+        GenerarMenu(posicion);
+        char input = getchar();        
+        switch (input)
+        {
+        case '1':
+        GenerarChunkB(posicion);
         getchar();
+            break;
+        case '2':
+        posicion = 1;
+        GenerarChunkB(posicion);
+        getchar();
+            break;
+        case '3':
+        posicion = 2;
+        GenerarChunkB(posicion);
+        getchar();
+            break;
+        case '4':
+        posicion = 3;
+        GenerarChunkB(posicion);
+        getchar();
+            break;
+        default:
+            break;
+        }
     }
     
 return 0;
