@@ -12,7 +12,7 @@ const char *tiposPradera[] = {"Conejo", "Oveja Gigante", "Slime Azul", "Aguila C
 const char *tiposJungla[] = {"Boa Constrictora Gigante", "Rana Venenosa", "Caiman", "Nutria Pantera Negra", "Pirana"};
 const char *tiposGranja[] = {"Granjero", "Vaca", "Gallina","Oveja", "Gallina Pavo Real"};
 const char *tiposLagDorada[] = {"Mujer Seductora", "Dragon Blanco", "Slime Dorado"};
-const char *tiposBCarmesi[] = {"Pulpo Infernal Carmesi", "Zombie Mutante Carmesi", "Slime Carmesi", "Arrana Corrupta Carmesi", "Cangrejo Gigante Azul"};
+const char *tiposBCarmesi[] = {"Pulpo Infernal Carmesi", "Zombie Mutante Carmesi", "Slime Carmesi", "Arana Corrupta Carmesi", "Cangrejo Gigante Azul"};
 typedef struct 
 {
     char tipo;
