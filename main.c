@@ -15,12 +15,21 @@ typedef struct
     char posicion;
 
 }Entidad;
+typedef struct 
+{
+
+
+}Chunk;
+
 
 char GenerarTerreno(const char lugares[],int size){
     int random = rand() % size;
     return lugares[random];  
 }
-
+char GenerarPosicion(const char posiciones[], int size){
+     int random = rand() % size;
+    return posiciones[random];  
+}
 char GenerarTipo(int TerrenoActual){
     int tamañoTipos= sizeof(tipos)/ sizeof(tipos[0]);    
     bool tipoCorrecto = true;
@@ -44,11 +53,16 @@ char GenerarTipos(int Cantidad){
 }
 void GenerarChunk(){
     int tamañoLugares = sizeof(lugares)/ sizeof(lugares[0]);
+    int tamañoPosiciones = sizeof(posiciones)/ sizeof(posiciones[0]);
     int MaximaCantidadTipos = 6;
-    char TerrenoActual = GenerarTerreno(lugares,tamañoLugares);
+    char TerrenoActual = GenerarTerreno(lugares, tamañoLugares);
+    char PosicionActual = GenerarPosicion(posiciones, tamañoPosiciones);
     int CantidadTipos = rand() % MaximaCantidadTipos;
     char TipoActual = GenerarTipo(TerrenoActual);
-    return printf("Te encuentras en: %s\n", TerrenoActual);
+
+    
+    printf("Te encuentras en: %s\n", TerrenoActual);
+    printf("Mirando Hacia: %s\n", PosicionActual);
 }
 void GenerarEstado(){}
 
