@@ -9,10 +9,10 @@ const char *lugares[] = {"Bosque", "Pradera","Jungla","Granja","Laguna Dorada", 
 const char *posiciones[] = {"Norte", "Este", "Sur", "Oeste"};
 const char *tiposBosque[] = {"Hombre Lobo", "Lobo Blanco", "Buho Gigante", "Oso Negro", "Oso Blanco"};
 const char *tiposPradera[] = {"Conejo", "Oveja Gigante", "Slime Azul", "Aguila Calva"};
-const char *tiposJungla[] = {"Boa Constrictora Gigante", "Rana Venenosa", "Caiman", "Nutria Pantera Negra", "Piraña"};
+const char *tiposJungla[] = {"Boa Constrictora Gigante", "Rana Venenosa", "Caiman", "Nutria Pantera Negra", "Pirana"};
 const char *tiposGranja[] = {"Granjero", "Vaca", "Gallina","Oveja", "Gallina Pavo Real"};
 const char *tiposLagDorada[] = {"Mujer Seductora", "Dragon Blanco", "Slime Dorado"};
-const char *tiposBCarmesi[] = {"Pulpo Infernal Carmesi", "Zombie Mutante Carmesi", "Slime Carmesi", "Arraña Corrupta Carmesi", "Cangrejo Gigante Azul"};
+const char *tiposBCarmesi[] = {"Pulpo Infernal Carmesi", "Zombie Mutante Carmesi", "Slime Carmesi", "Arrana Corrupta Carmesi", "Cangrejo Gigante Azul"};
 typedef struct 
 {
     char tipo;
@@ -28,49 +28,90 @@ typedef struct
 void GuardarChunk(){}
 void GuardarVariosChunk(){}
 
-int GenerarTerreno(const char lugares[],int size){
+int GenerarTerreno(int size){
     int random = rand() % size;
     return random;  
 }
-char GenerarPosicion(const char posiciones[], int size){
+int GenerarPosicion( int size){
      int random = rand() % size;
-    return posiciones[random];  
+    return random;  
 }
-char GenerarTipo(int TerrenoActual){   
-    
-    
+const char* GenerarTipo(int TerrenoActual){   
+    if (TerrenoActual == 0)
+    {
+        int tamanotipo = sizeof(tiposBosque)/ sizeof(tiposBosque[0]);
+        int random = rand() % tamanotipo;
+        return tiposBosque[random];  
+    }
+    else if (TerrenoActual == 1)
+    {
+        int tamaotipo = sizeof(tiposPradera)/ sizeof(tiposPradera[0]);
+        int random = rand() % tamaotipo;
+        return tiposPradera[random];  
+    }
+    else if (TerrenoActual == 2)
+    {
+        int tamaotipo = sizeof(tiposJungla)/ sizeof(tiposJungla[0]);
+        int random = rand() % tamaotipo;
+        return tiposJungla[random];  
+    }
+    else if (TerrenoActual == 3)
+    {
+        int tamaotipo = sizeof(tiposGranja)/ sizeof(tiposGranja[0]);
+        int random = rand() % tamaotipo;
+        return tiposGranja[random];  
+    }
+    else if (TerrenoActual == 4)
+    {
+        int tamaotipo = sizeof(tiposLagDorada)/ sizeof(tiposLagDorada[0]);
+        int random = rand() % tamaotipo;
+        return tiposLagDorada[random];  
+    }
+    else if (TerrenoActual == 5)
+    {
+        int tamaotipo = sizeof(tiposBCarmesi)/ sizeof(tiposBCarmesi[0]);
+        int random = rand() % tamaotipo;
+        return tiposBCarmesi[random];  
+    }
+    else {
+        return "El Terreno Actual no existe";
+    }    
 }
-char GenerarTipos(int CantidadTipos, char TerrenoActual){
+void GenerarTipos(int CantidadTipos, char TerrenoActual){
 
-    char TipoActual = GenerarTipo(TerrenoActual);
-
+    
     for (int i = 0; i < CantidadTipos; i++)
     {
+        const char* TipoActual = GenerarTipo(TerrenoActual);
+
+
         printf("Ves un: %s\n", TipoActual);
     }
 
 }
 void GenerarChunk(){
-    int tamañoLugares = sizeof(lugares)/ sizeof(lugares[0]);
-    int tamañoPosiciones = sizeof(posiciones)/ sizeof(posiciones[0]);
+    int tamanoLugares = sizeof(lugares)/ sizeof(lugares[0]);
+    int tamanoPosiciones = sizeof(posiciones)/ sizeof(posiciones[0]);
     int MaximaCantidadTipos = 6;
-    char TerrenoActual = GenerarTerreno(lugares, tamañoLugares);
-    char TerrenoActualNombre = lugares[TerrenoActual];
+    int TerrenoActual = GenerarTerreno(tamanoLugares);
+    const char* TerrenoActualNombre = lugares[TerrenoActual];
 
-    char PosicionActual = GenerarPosicion(posiciones, tamañoPosiciones);
+    int PosicionActual = GenerarPosicion(tamanoPosiciones);
+    const char* PosicionActualNombre = posiciones[PosicionActual];
     int CantidadTipos = rand() % MaximaCantidadTipos;
 
    
-    printf("Te encuentras en: %s\n", TerrenoActual);
-    printf("Mirando Hacia: %s\n", PosicionActual);
+    printf("Te encuentras en: %s\n", TerrenoActualNombre);
+    printf("Mirando Hacia: %s\n", PosicionActualNombre);
     GenerarTipos(CantidadTipos, TerrenoActual);
 }
-void GenerarEstado(){}
 
 int main (){
     while (true)
     {
+        srand(time(NULL));
         GenerarChunk();
+        getchar();
     }
     
 return 0;
