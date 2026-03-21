@@ -7,7 +7,7 @@
 
 
 const char *lugares[] = {"Bosque", "Pradera","Jungla","Granja","Laguna Dorada", "Bosque Carmesi"};
-const char *posiciones[] = {"Norte", "Este", "Sur", "Oeste"};
+const char *posiciones[] = {"Este", "Norte",  "Sur", "Oeste"};
 const char *tiposBosque[] = {"Hombre Lobo", "Lobo Blanco", "Buho Gigante", "Oso Negro", "Oso Blanco"};
 const char *tiposPradera[] = {"Conejo", "Oveja Gigante", "Slime Azul", "Aguila Calva"};
 const char *tiposJungla[] = {"Boa Constrictora Gigante", "Rana Venenosa", "Caiman", "Nutria Pantera Negra", "Pirana"};
@@ -16,9 +16,9 @@ const char *tiposLagDorada[] = {"Mujer Seductora", "Dragon Blanco", "Slime Dorad
 const char *tiposBCarmesi[] = {"Pulpo Infernal Carmesi", "Zombie Mutante Carmesi", "Slime Carmesi", "Arana Corrupta Carmesi", "Cangrejo Gigante Azul"};
 typedef struct 
 {
-    char tipo;
+    const char* tipo;
     int vida;
-    char posicion;
+    const char* posicion;
 
 }Entidad;
 typedef struct 
@@ -119,70 +119,38 @@ void GenerarChunkB(int posicion){
 }
 void GenerarMenu(int posicion){
 
-if (posicion == 0)
-{
-    
-    printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
-    printf("2-> Voltear hacia: %s\n",  posiciones[posicion+1]);
-    printf("3-> Voltear hacia: %s\n",  posiciones[posicion+2]);
-    printf("4-> Voltear hacia: %s\n",  posiciones[posicion+3]);
-}else if (posicion == 1)
-{
-    
     printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
 
-    printf("2-> Voltear hacia: %s\n",  posiciones[posicion-1]);
-    printf("3-> Voltear hacia: %s\n",  posiciones[posicion+2]);
-    printf("4-> Voltear hacia: %s\n",  posiciones[posicion+3]);
+    printf("2-> Voltear hacia la izquierda\n");
+    printf("3-> Voltear hacia la derecha\n");
 }
-else if (posicion ==2)
-{
-    
-    printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
-
-    printf("2-> Voltear hacia: %s\n",  posiciones[posicion-1]);
-    printf("3-> Voltear hacia: %s\n",  posiciones[posicion-2]);
-    printf("4-> Voltear hacia: %s\n",  posiciones[posicion+3]);
-}
-else if (posicion ==3)
-{
-    printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
-
-    printf("2-> Voltear hacia: %s\n",  posiciones[posicion-1]);
-    printf("3-> Voltear hacia: %s\n",  posiciones[posicion-2]);
-    printf("4-> Voltear hacia: %s\n",  posiciones[posicion-3]);
-}
-}
-
-
-
 
 int main (){
     srand(time(NULL));
     int posicion = GenerarChunk();
+    
     while (true)
     {
         GenerarMenu(posicion);
+        int izquierda = (posicion + 3) % 4;
+        int derecha = (posicion + 1) % 4;
         char input = getchar();        
         switch (input)
         {
         case '1':
+       
         GenerarChunkB(posicion);
+        
         getchar();
             break;
-        case '2':
-        posicion = 1;
+        case '2':posicion = izquierda;
+        
         GenerarChunkB(posicion);
+        
         getchar();
             break;
-        case '3':
-        posicion = 2;
-        GenerarChunkB(posicion);
-        getchar();
-            break;
-        case '4':
-        posicion = 3;
-        GenerarChunkB(posicion);
+        case '3':posicion = derecha;
+        
         getchar();
             break;
         default:
