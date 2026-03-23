@@ -4,6 +4,10 @@
 #include <string.h>
 #include <time.h>
 #include <stdarg.h>
+#include <conio.h>
+
+const char *Opciones[] = {"Opcion A", "Opcion B"};
+
 
 //Los arrays con B representan a los NPC amistosos o con los que se puede hablar
 const char *lugares[] = {"Bosque", "Pradera","Jungla","Granja","Laguna Dorada", "Bosque Carmesi"};
@@ -14,18 +18,22 @@ const char *tiposPradera[] = {"Conejo", "Oveja Gigante", "Slime Azul", "Aguila C
 const char *tiposPraderaB[] = {"NPC Pradera Amistoso"};
 const char *tiposJungla[] = {"Boa Constrictora Gigante", "Rana Venenosa", "Caiman", "Nutria Pantera Negra", "Pirana"};
 const char *tiposJunglaB[] = {""};
-const char *tiposGranja[] = {"Granjero", "Vaca", "Gallina","Oveja", "Gallina Pavo Real"};
-const char *tiposGranjaB[] = {};
-const char *tiposLagDorada[] = {"Mujer Seductora", "Dragon Blanco", "Slime Dorado"};
-const char *tiposLagDoradaB[] = {};
+const char *tiposGranja[] = { "Vaca", "Gallina","Oveja", "Gallina Pavo Real"};
+const char *tiposGranjaB[] = {"Granjero","NPC Grajero amistoso"};
+const char *tiposLagDorada[] = { "Dragon Blanco", "Slime Dorado"};
+const char *tiposLagDoradaB[] = {"Mujer Seductora"};
 const char *tiposBCarmesi[] = {"Pulpo Infernal Carmesi", "Zombie Mutante Carmesi", "Slime Carmesi", "Arana Corrupta Carmesi", "Cangrejo Gigante Azul"};
 const char *tiposBCarmesiB[] = {};
+
 typedef struct 
 {
-    const char* tipo;
+    char* nombre;
+}Tipo;
+typedef struct 
+{
+    Tipo tipo;
     int vida;
     const char* posicion;
-
 }Entidad;
 typedef struct 
 {
@@ -34,7 +42,9 @@ typedef struct
     int cantidadEntidades;
     const char* entidades[6];
 }Chunk;
+
 void GuardarChunk(){}
+
 void GuardarVariosChunk(){}
 
 int GenerarTerreno(int size){
@@ -136,7 +146,7 @@ void GenerarTipos(int CantidadTipos, char TerrenoActual){
     for (int i = 0; i < CantidadTipos; i++)
     {
         const char* TipoActual = GenerarTipo(TerrenoActual);
-        printf("Ves un: %s\n", TipoActual);
+        printf("Ves un: %s\n", TipoActual);        
     }
 
 }
@@ -157,7 +167,7 @@ int GenerarChunk(){
     GenerarTipos(CantidadTipos, TerrenoActual);
     return PosicionActual;
 }
-void GenerarChunkB(int posicion){
+void GenerarChunkB(int posicion, int iteracion){
     int tamanoLugares = sizeof(lugares)/ sizeof(lugares[0]);
     int MaximaCantidadTipos = 6;
     int TerrenoActual = GenerarTerreno(tamanoLugares);
@@ -173,18 +183,49 @@ void GenerarChunkB(int posicion){
 }
 void GenerarMenu(int posicion){
 
-    printf("1-> Caminar hacia : %s\n", posiciones[posicion]);
+    int ch = _getch();
+    if (ch == 0 || ch == 224) { // Prefix for special keys
+       int a=0;
+        for (int i = 0; i < sizeof(Opciones)/ sizeof(Opciones[0]); i++)
+        {
+            if (ch == 72)//Arriba
+            {
+                system("cls");
+                Opciones[a+1];
+            }
+            if (ch == 80)//Abajo
+            {
+                system("cls");
+                Opciones[a-1];
+            }
+            
+        }
+        
+    }
 
-    printf("2-> Voltear hacia la izquierda\n");
-    printf("3-> Voltear hacia la derecha\n");
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
 
 int main (){
     srand(time(NULL));
     int posicion = GenerarChunk();
-    
+    int i=0;
     while (true)
     {
+        i = i+1;
         
         GenerarMenu(posicion);
         
@@ -196,21 +237,21 @@ int main (){
         {
         case '1':
         
-        GenerarChunkB(posicion);        
+        GenerarChunkB(posicion,i);        
         getchar();
         
             break;
         case '2':
         posicion = izquierda;     
         
-        GenerarChunkB(posicion);        
+        GenerarChunkB(posicion,i);        
         getchar();
         
             break;
         case '3':
         posicion = derecha;
         
-        GenerarChunkB(posicion); 
+        GenerarChunkB(posicion,i); 
         getchar();
         
             break;
