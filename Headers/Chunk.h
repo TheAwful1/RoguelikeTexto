@@ -8,22 +8,49 @@
 #include <Entidades.h>
 #include <Objetos.h>
 
+const char *lugares[] = {"Bosque", "Pradera","Jungla","Granja","Laguna Dorada", "Bosque Carmesi"};
+const char *posiciones[] = {"Oeste", "Norte", "Este", "Sur"};
 
 typedef struct 
 {
-    char* Direccion;
+    const char* Direccion;
     int** Posicion;
-    char* Bioma;
-    Entidades* entidades;
+    const char* Bioma;
+    const Entidades* entidades;
     Objetos* objetos;
 
 } Chunk;
 
+const char* GenerarDireccion(){
+    int tPosiciones = sizeof(posiciones)/ sizeof(posiciones[0]);
+    int random = rand() % tPosiciones;
+    const char* Direccion = posiciones[random];
+    return Direccion;  
+}
 
-char* GenerarDireccion(){}
-char* GenerarBioma(){}
-int** GenerarPosicion(){} //Esto Devuelve una matiz, realmente no se me ocurre que hacer con esto
-Entidades* GenerarEntidades(){} //Esto Deberia devolver un array de structs
+const char* GenerarBioma(){
+    int tLugares = sizeof(lugares)/ sizeof(lugares[0]);
+    int random = rand() % tLugares;
+    const char* Direccion = posiciones[random];
+    return Direccion;    
+}
+int** GenerarPosicion(){//Esto Devuelve una matiz, realmente no se me ocurre que hacer con esto quiza en el futuro lo use para hacer un grid, quiza deba ponerlo a las entidades
+
+} 
+Entidades GenerarEntidad(){}
+
+const Entidades* GenerarEntidades(){
+ int MaximaCantidadEntidades = 6;
+ int random = rand() % MaximaCantidadEntidades;
+Entidades entidades[random];
+ for (int i = 0; i < random; i++)
+ {
+    entidades[i] = GenerarEntidad();
+ }
+ return entidades;
+
+} //Esto Deberia devolver un array de structs
+
 Objetos* GenerarObjetos(){}//Esto Deberia devolver un array de structs
 
 //En el futuro podria generar un mapa mas grande y complejo usando muchos chunks

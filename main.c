@@ -52,7 +52,7 @@ int GenerarTerreno(int size){
     return random;  
 }
 int GenerarPosicion( int size){
-     int random = rand() % size;
+    int random = rand() % size;
     return random;  
 }
 const char* GenerarTipo(int TerrenoActual){//Se puede reemplazar con un bucle
