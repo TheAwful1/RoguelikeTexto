@@ -17,7 +17,7 @@ typedef struct
     int** Posicion;
     const char* Bioma;
     const Entidades* entidades;
-    Objetos* objetos;
+    const Objetos* objetos;
 
 } Chunk;
 
@@ -41,9 +41,10 @@ Entidades GenerarEntidad(){}
 
 const Entidades* GenerarEntidades(){
  int MaximaCantidadEntidades = 6;
+ int min = 1;
  int random = rand() % MaximaCantidadEntidades;
-Entidades entidades[random];
- for (int i = 0; i < random; i++)
+ Entidades entidades[random]; //En la declaracion el numero de entidades predefinidas es random
+ for (int i = 0; i < sizeof(entidades)/ sizeof(entidades[0]); i++)
  {
     entidades[i] = GenerarEntidad();
  }
@@ -51,7 +52,19 @@ Entidades entidades[random];
 
 } //Esto Deberia devolver un array de structs
 
-Objetos* GenerarObjetos(){}//Esto Deberia devolver un array de structs
+Objetos GenerarObjeto(){}
+
+const Objetos* GenerarObjetos(){
+    int MaximaCantidadObjetos = 6;
+    int random = rand() % MaximaCantidadObjetos;
+    Objetos objetos[random];
+ for (int i = 0; i < random; i++)
+ {
+    objetos[i] = GenerarObjeto();
+ }
+ return objetos;
+
+}//Esto Deberia devolver un array de structs
 
 //En el futuro podria generar un mapa mas grande y complejo usando muchos chunks
 Chunk GenerarChunk(){

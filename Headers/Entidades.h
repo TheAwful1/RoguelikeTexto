@@ -14,12 +14,26 @@ const char *tiposBCarmesiB[] = {};
 
 typedef struct Entidades
 {
-    int Salud;//Estos atributos se generan al azar
-    int Rango;//Estos atributos se generan al azar
-    int Clase;//Estos atributos se generan al azar
+    int Salud;//Estos atributos se generan al azar en NPC
+    int Rango;//Estos atributos se generan al azar en NPC
+    int Clase;//Estos atributos se generan al azar en NPC
     int EscenciaAlma;
     int FragmentosAlma;
     int CapacidadActual;
     int CapacidadPosible;
 };
 
+typedef struct Jugador
+{
+    Entidades P1;
+    bool Vivo;
+};
+
+
+
+Entidades SubirRango(Entidades entidad){
+
+}
+Entidades SubirClase(Entidades entidad){
+    
+}
