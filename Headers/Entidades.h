@@ -51,7 +51,7 @@ typedef struct Objetos
 };
 typedef struct Tipo
 {
-    char* NombreTipo;
+    int TipoObjeto;
 };
 
 

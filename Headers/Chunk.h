@@ -15,8 +15,8 @@ typedef struct
     const char* Direccion;
     int** Posicion;
     const char* Bioma;
-    const Entidades* entidades;
-    const Objetos* objetos;
+    const Creatura* Creaturas;
+    const Objetos* Objetos;
 
 } Chunk;
 
@@ -36,20 +36,22 @@ const char* GenerarBioma(){
 int** GenerarPosicion(){//Esto Devuelve una matiz, realmente no se me ocurre que hacer con esto quiza en el futuro lo use para hacer un grid, quiza deba ponerlo a las entidades
 
 } 
-Entidades GenerarEntidad(){}
+Creatura GenerarCreatura(){
 
-const Entidades* GenerarEntidades(){
- int MaximaCantidadEntidades = 6;
+}
+
+const Creatura* GenerarCreaturas(){//Esto Deberia devolver un array de structs de creaturas
+ int MaximaCantidadCreatura = 6;
  int min = 1;
- int random = rand() % MaximaCantidadEntidades;
- Entidades entidades[random]; //En la declaracion el numero de entidades predefinidas es random
- for (int i = 0; i < sizeof(entidades)/ sizeof(entidades[0]); i++)
+ int random = rand() % MaximaCantidadCreatura;
+ Creatura creaturas[random]; //En la declaracion el numero de entidades predefinidas es random
+ for (int i = 0; i < sizeof(creaturas)/ sizeof(creaturas[0]); i++)
  {
-    entidades[i] = GenerarEntidad();
+    creaturas[i] = GenerarCreatura();
  }
- return entidades;
+ return creaturas;
 
-} //Esto Deberia devolver un array de structs
+} 
 
 Objetos GenerarObjeto(){}
 
@@ -71,7 +73,7 @@ Chunk GenerarChunk(){
     chunk.Direccion = GenerarDireccion();
     chunk.Bioma = GenerarBioma();
     chunk.Posicion = GenerarPosicion();
-    chunk.entidades = GenerarEntidades();
-    chunk.objetos = GenerarObjetos();
+    chunk.Creaturas = GenerarCreaturas();
+    chunk.Objetos = GenerarObjetos();
 return chunk;
 }
