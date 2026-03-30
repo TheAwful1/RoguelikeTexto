@@ -10,6 +10,7 @@ const char *tiposLagDorada[] = { "Dragon Blanco", "Slime Dorado"};
 const char *tiposLagDoradaB[] = {"Mujer Seductora"};
 const char *tiposBCarmesi[] = {"Pulpo Infernal Carmesi", "Zombie Mutante Carmesi", "Slime Carmesi", "Arana Corrupta Carmesi", "Cangrejo Gigante Azul"};
 const char *tiposBCarmesiB[] = {};
+const char *tipoObjeto[] = {"Arma", "Armadura", "Herramienta"};
 
 
 typedef struct Entidades
@@ -23,11 +24,36 @@ typedef struct Entidades
     int CapacidadPosible;
 };
 
+typedef struct Creatura //Como se le añadira comportamiento?
+{
+    Entidades NPC;
+    bool Vivo;
+};
+
 typedef struct Jugador
 {
     Entidades P1;
     bool Vivo;
+    Inventario inventario;
 };
+
+typedef struct Inventario
+{
+    const Objetos* Inventario;
+};
+
+typedef struct Objetos
+{
+    Entidades atributos;
+    bool Roto;
+    Tipo TipoObjeto;
+
+};
+typedef struct Tipo
+{
+    char* NombreTipo;
+};
+
 
 
 
@@ -35,5 +61,5 @@ Entidades SubirRango(Entidades entidad){
 
 }
 Entidades SubirClase(Entidades entidad){
-    
+
 }

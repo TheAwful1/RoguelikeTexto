@@ -6,7 +6,6 @@
 #include <stdarg.h>
 #include <conio.h>
 #include <Entidades.h>
-#include <Objetos.h>
 
 const char *lugares[] = {"Bosque", "Pradera","Jungla","Granja","Laguna Dorada", "Bosque Carmesi"};
 const char *posiciones[] = {"Oeste", "Norte", "Este", "Sur"};
