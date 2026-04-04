@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <time.h>
+#include <stdarg.h>
+#include <conio.h>
+#include <Entidades.h>
+
+if(Entidades.TipoObjeto) {
+
+
+}
+
+
